@@ -1,6 +1,6 @@
 import React from "react";
-import MovieGrid from "./components/MovieGrid/MovieGrid";
-import NavBar from "./components/NavBar/NavBar";
+import MovieGrid from "./components/MovieGrid";
+import NavBar from "./components/NavBar";
 
 const App: React.FC = () => {
   return (
