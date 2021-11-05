@@ -5,6 +5,7 @@ import {
   FETCH_MOVIES_SUCCESS,
   FETCH_MOVIES_FAILURE,
 } from "./movies.events";
+import { Movies } from "./utils/Movies";
 
 interface MovieFetchingState {
   movies: null | MoviesData;
@@ -29,16 +30,14 @@ const moviesReducer = (state = initalState, action: FetchActions) => {
       const movies = action.payload;
       return {
         ...state,
-        movies: [
-          {
-            ...movies,
-            page: movies?.page,
-            results: movies?.results,
-            dates: movies?.dates,
-            total_pages: movies?.total_pages,
-            total_results: movies?.total_results,
-          },
-        ],
+        movies: {
+          ...movies,
+          page: movies?.page,
+          results: movies?.results.map(Movies),
+          dates: movies?.dates,
+          total_pages: movies?.total_pages,
+          total_results: movies?.total_results,
+        },
         isFetching: false,
       };
     case FETCH_MOVIES_FAILURE:

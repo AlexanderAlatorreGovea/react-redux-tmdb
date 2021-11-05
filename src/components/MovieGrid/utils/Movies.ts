@@ -1,7 +1,9 @@
 import { MoviesResults } from "../models/MovieModel";
 
-export const Movies = (movie: MoviesResults): MoviesResults => {
-  const poster_path = movie.poster_path || "";
+export const Movies = (movie: MoviesResults): MoviesResults | {} => {
+  if (typeof movie !== "object") return {};
+
+  const poster_path = movie.poster_path || undefined;
   const adult = movie.adult || false;
   const overview = movie.overview || "";
   const release_date = movie.release_date || "";

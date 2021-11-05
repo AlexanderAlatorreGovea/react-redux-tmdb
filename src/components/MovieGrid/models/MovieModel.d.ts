@@ -1,5 +1,5 @@
 interface MoviesResults {
-  poster_path: string | null;
+  poster_path: string | undefined;
   adult: boolean;
   overview: string;
   release_date: string;
@@ -8,7 +8,7 @@ interface MoviesResults {
   original_title: string;
   original_language: string;
   title: string;
-  backdrop_path: string | null;
+  backdrop_path: string | undefined;
   popularity: number | null;
   vote_count: number | null;
   video: boolean | false;

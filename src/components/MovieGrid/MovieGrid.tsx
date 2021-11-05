@@ -1,19 +1,19 @@
 import React, { useEffect } from "react";
 
-import MovieCard from "../MovieCard";
-
 import { useDispatch, useSelector } from "react-redux";
 
 import { RootState } from "../../store/store";
+import MovieCard from "../MovieCard";
+import { MoviesData } from "./models/MovieModel";
 import { fetchMovies } from "./movies.actions";
 
 const ERROR_MESSAGE = "oops something went wrong";
 
-const MovieGrid: React.FC = () => {
+const MovieGrid: React.FC<MoviesData> = () => {
   const dispatch = useDispatch();
   const { movies, isFetching, errorMessage } = useSelector(
     (state: RootState) => state.movies
-  );
+  ); 
   useEffect(() => {
     dispatch(
       fetchMovies(
@@ -22,10 +22,12 @@ const MovieGrid: React.FC = () => {
       )
     );
   }, [dispatch]);
-  
+
   return (
     <div className="movie-grid">
-      <MovieCard />
+      {isFetching && <div>loading...</div>}
+      {movies && <MovieCard movies={movies?.results} />}
+      {errorMessage && <div>{errorMessage}</div>}
     </div>
   );
 };
