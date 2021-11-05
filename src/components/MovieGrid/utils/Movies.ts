@@ -1,54 +1,35 @@
-import { MoviesData } from "../models/MovieModel";
+import { MoviesResults } from "../models/MovieModel";
 
-export const Movies = ({
-  page = 1,
-  results = [],
-  dates = {
-    maximum: "",
-    minimum: "",
-  },
-  total_pages = 0,
-  total_results = 0,
-}: MoviesData) => {
-  const [movieData] = results;
-
-  const poster_path = movieData.poster_path || "";
-  const adult = movieData.adult || "";
-  const overview = movieData.overview || "";
-  const release_date = movieData.release_date || "";
-  const genre_ids = movieData.genre_ids || "";
-  const id = movieData.id || "";
-  const original_title = movieData.original_title || "";
-  const original_language = movieData.original_language || "";
-  const title = movieData.title || "";
-  const backdrop_path = movieData.backdrop_path || "";
-  const popularity = movieData.popularity || "";
-  const vote_count = movieData.vote_count || "";
-  const video = movieData.video || "";
-  const vote_average = movieData.vote_average || "";
+export const Movies = (movie: MoviesResults): MoviesResults => {
+  const poster_path = movie.poster_path || "";
+  const adult = movie.adult || false;
+  const overview = movie.overview || "";
+  const release_date = movie.release_date || "";
+  const genre_ids = movie.genre_ids || [];
+  const id = movie.id || null;
+  const original_title = movie.original_title || "";
+  const original_language = movie.original_language || "";
+  const title = movie.title || "";
+  const backdrop_path = movie.backdrop_path || "";
+  const popularity = movie.popularity || null;
+  const vote_count = movie.vote_count || null;
+  const video = movie.video || false;
+  const vote_average = movie.vote_average || null;
 
   return {
-    page,
-    results: [
-      {
-        poster_path,
-        adult,
-        overview,
-        release_date,
-        genre_ids,
-        id,
-        original_title,
-        original_language,
-        title,
-        backdrop_path,
-        popularity,
-        vote_count,
-        video,
-        vote_average,
-      },
-    ],
-    dates,
-    total_pages,
-    total_results,
+    poster_path,
+    adult,
+    overview,
+    release_date,
+    genre_ids,
+    id,
+    original_title,
+    original_language,
+    title,
+    backdrop_path,
+    popularity,
+    vote_count,
+    video,
+    vote_average,
   };
 };

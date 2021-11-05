@@ -4,15 +4,15 @@ interface MoviesResults {
   overview: string;
   release_date: string;
   genre_ids: number[];
-  id: number;
+  id: number | null;
   original_title: string;
   original_language: string;
   title: string;
   backdrop_path: string | null;
-  popularity: number;
-  vote_count: number;
-  video: boolean;
-  vote_average: number;
+  popularity: number | null;
+  vote_count: number | null;
+  video: boolean | false;
+  vote_average: number | null;
 }
 
 interface MoviesData {

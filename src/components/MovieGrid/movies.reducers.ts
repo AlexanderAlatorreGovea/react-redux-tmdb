@@ -18,20 +18,27 @@ const initalState: MovieFetchingState = {
   errorMessage: "",
 };
 
-const moviesReducer = (
-  state = initalState,
-  action: FetchActions
-) => {
+const moviesReducer = (state = initalState, action: FetchActions) => {
   switch (action.type) {
     case FETCH_MOVIES_START:
       return {
         ...state,
         isFetching: true,
-      }; 
+      };
     case FETCH_MOVIES_SUCCESS:
+      const movies = action.payload;
       return {
         ...state,
-        movies: action.payload,
+        movies: [
+          {
+            ...movies,
+            page: movies?.page,
+            results: movies?.results,
+            dates: movies?.dates,
+            total_pages: movies?.total_pages,
+            total_results: movies?.total_results,
+          },
+        ],
         isFetching: false,
       };
     case FETCH_MOVIES_FAILURE:

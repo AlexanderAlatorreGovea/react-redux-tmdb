@@ -32,10 +32,8 @@ export const fetchMovies = (url: string, errorMessage: string) => {
 
     try {
       const movies = await fetchData(url, errorMessage);
-      console.log("movies: ", movies);
-      const movieModel = movies.map(Movies);
     
-      dispatch(fetchMoviesSuccess(movieModel));
+      dispatch(fetchMoviesSuccess(movies));
     } catch (error: any) {
       const errorMessage = error?.status_message;
       console.error(errorMessage);
