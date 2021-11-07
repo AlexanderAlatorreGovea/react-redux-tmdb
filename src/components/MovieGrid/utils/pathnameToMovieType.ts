@@ -1,19 +1,22 @@
 import { paths as Paths } from "../../../config/paths";
 
-export const pathnameToMovieType = (pathname: string): string => {
+export const pathnameToMovieType = (
+  pathname: string,
+  pageNumber?: number | undefined
+): string => {
   switch (pathname) {
-    case Paths.root: 
+    case Paths.root:
     case Paths.upcomingMovies:
-      return Paths.api.upcomingMovies(1);
+      return Paths.api.upcomingMovies(pageNumber);
 
     case Paths.topRatedMovies:
-      return Paths.api.topRatedMovies(1);
+      return Paths.api.topRatedMovies(pageNumber);
 
     case Paths.popularMovies:
-      return Paths.api.popularMovies(1);
+      return Paths.api.popularMovies(pageNumber);
 
     case Paths.nowPlayingMovies:
-      return Paths.api.nowPlayingMovies(1);
+      return Paths.api.nowPlayingMovies(pageNumber);
 
     default:
       throw new Error(`${pathname} is not a valid emailType`);

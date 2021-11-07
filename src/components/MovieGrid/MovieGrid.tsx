@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router";
 
@@ -6,7 +6,7 @@ import { RootState } from "../../store/store";
 import MovieCard from "../MovieCard";
 import { fetchMovies } from "./redux/movies.actions";
 
-import { errors as Erorrs } from "../../config/errors";
+import { errors as Errors } from "../../config/errors";
 
 import "./MovieGrid.css";
 
@@ -15,16 +15,20 @@ const MovieGrid: React.FC = () => {
   const { movies, isFetching, errorMessage } = useSelector(
     (state: RootState) => state.movies
   );
-  let { pathname } = useLocation();
+  const { pathname } = useLocation();
+
+  const STARTING_PAGE = 1;
 
   useEffect(() => {
-    dispatch(fetchMovies(pathname, Erorrs.fetchErrors.GENERIC));
+    dispatch(fetchMovies(pathname, Errors.fetchErrors.GENERIC, STARTING_PAGE));
   }, [dispatch, pathname]);
+
+  const moviesFinishedLoading = !isFetching && movies;
 
   return (
     <div className="movie-grid">
       {isFetching && <div>loading...</div>}
-      {movies && <MovieCard movies={movies?.results} />}
+      {moviesFinishedLoading && <MovieCard movies={movies?.results} />}
       {errorMessage && <div>{errorMessage}</div>}
     </div>
   );

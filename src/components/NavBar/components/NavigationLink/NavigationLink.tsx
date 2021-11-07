@@ -7,11 +7,11 @@ import './NavigationLink.css';
 
 const NavigationLink: React.FC<NavigationLinkProps> = ({
   path,
-  label,
+  label
 }) => {
   return (
     <>
-      <li>
+      <li >
         <NavLink
           className={(isActive) =>
             "nav-link" + (!isActive ? " unselected" : "")

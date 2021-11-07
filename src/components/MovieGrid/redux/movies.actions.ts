@@ -27,12 +27,16 @@ const fetchMoviesFailure = (errorMessage: string): FetchErrorAction => ({
   payload: errorMessage,
 });
 
-export const fetchMovies = (slug: string, errorMessage: string) => {
+export const fetchMovies = (
+  slug: string,
+  errorMessage: string,
+  pageNumber?: number | undefined
+) => {
   return async (dispatch: (arg0: { type: string }) => void) => {
     dispatch(fetchMoviesStart());
-
+    
     try {
-      const movieType = pathnameToMovieType(slug);
+      const movieType = pathnameToMovieType(slug, pageNumber);
       const movies = await fetchData(movieType, errorMessage);
 
       dispatch(fetchMoviesSuccess(movies));
