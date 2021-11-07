@@ -12,21 +12,14 @@ import "./MovieGrid.css";
 
 const MovieGrid: React.FC = () => {
   const dispatch = useDispatch();
-  const {pathname} = useLocation();
   const { movies, isFetching, errorMessage } = useSelector(
     (state: RootState) => state.movies
   );
-
-  console.log("location: ", pathname);
+  let { pathname } = useLocation();
 
   useEffect(() => {
-    dispatch(
-      fetchMovies(
-        "https://api.themoviedb.org/3/movie/now_playing?api_key=745fff882d6434c78ae4843ae559ef06&language=en-US&page=1",
-        Erorrs.fetchErrors.GENERIC
-      )
-    );
-  }, [dispatch]);
+    dispatch(fetchMovies(pathname, Erorrs.fetchErrors.GENERIC));
+  }, [dispatch, pathname]);
 
   return (
     <div className="movie-grid">
