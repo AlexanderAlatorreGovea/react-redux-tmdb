@@ -2,7 +2,7 @@ import React from "react";
 import { Route } from "react-router";
 import { BrowserRouter } from "react-router-dom";
 import MovieGrid from "./components/MovieGrid";
-import NavBar from "./components/NavBar";
+import NavBar from "./components/NavBar"; 
 import { paths as Paths } from "./config/paths";
 
 const App: React.FC = () => {

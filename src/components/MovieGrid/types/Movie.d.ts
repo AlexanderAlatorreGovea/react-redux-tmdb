@@ -1,18 +1,18 @@
 interface MoviesResults {
-  poster_path: string | undefined;
+  poster_path?: string;
   adult: boolean;
   overview: string;
   release_date: string;
   genre_ids: number[];
-  id: number | null;
+  id?: number;
   original_title: string;
   original_language: string;
   title: string;
-  backdrop_path: string | undefined;
-  popularity: number | null;
-  vote_count: number | null;
+  backdrop_path?: string;
+  popularity?: number;
+  vote_count?: number;
   video: boolean | false;
-  vote_average: number | null;
+  vote_average?: number;
 }
 
 interface MoviesData {

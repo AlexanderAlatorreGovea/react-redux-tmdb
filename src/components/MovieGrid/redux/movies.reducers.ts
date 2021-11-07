@@ -1,11 +1,11 @@
-import { FetchActions } from "./models/FetchActionModel";
-import { MoviesData } from "./models/MovieModel";
+import { FetchActions } from "../types/FetchActions";
+import { MoviesData } from "../types/Movie";
 import {
   FETCH_MOVIES_START,
   FETCH_MOVIES_SUCCESS,
   FETCH_MOVIES_FAILURE,
 } from "./movies.events";
-import { Movies } from "./utils/Movies";
+import { Movie } from "../utils/Movies";
 
 interface MovieFetchingState {
   movies: null | MoviesData;
@@ -32,11 +32,11 @@ const moviesReducer = (state = initalState, action: FetchActions) => {
         ...state,
         movies: {
           ...movies,
-          page: movies?.page,
-          results: movies?.results.map(Movies),
-          dates: movies?.dates,
-          total_pages: movies?.total_pages,
-          total_results: movies?.total_results,
+          page: movies?.page || 0,
+          results: movies?.results.map((movie: any) => new Movie(movie)),
+          dates: movies?.dates || {},
+          total_pages: movies?.total_pages || 0,
+          total_results: movies?.total_results || 0,
         },
         isFetching: false,
       };

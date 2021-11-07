@@ -1,20 +1,40 @@
 import React from "react";
-import { MoviesResults } from "../MovieGrid/models/MovieModel";
 
-import "./MovieCard.css";
+import { images as ImageConfig } from "../../config/images";
+import { MovieCardProps } from "./types/MovieCard";
+import { MoviesResults } from "../MovieGrid/types/Movie";
 
-const MovieCard = ({ movies }: MoviesResults[]) => {
-  console.log("movies ---", movies);
+import { truncateTitle } from "./utils/truncateString";
+
+import "./MovieCard.css"; 
+
+const MovieCard: React.FC<MovieCardProps> = ({ movies }) => {
   return (
-    <div className="movie-card">
-      {movies.map(({ poster_path, id, title }: MoviesResults) => {
-        return (
-          <div key={id}>
-            <img src={poster_path} alt={title} />
-          </div>
-        );
-      })}
-    </div>
+    <>
+      {movies.map(
+        ({
+          poster_path,
+          id,
+          title,
+          vote_average,
+          vote_count,
+        }: MoviesResults) => {
+          const truncatedTitle = truncateTitle(title);
+
+          return (
+            <div className="movie-card" key={id}>
+              <img
+                src={`${ImageConfig.base_url}${ImageConfig.poster_sizes.MEDIUM_LARGE}${poster_path}`}
+                alt={title}
+              />
+              <p>{truncatedTitle}</p>
+              <p>Avergage vote: {vote_average}</p>
+              <p>Total votes: {vote_count}</p>
+            </div>
+          );
+        }
+      )}
+    </>
   );
 };
 

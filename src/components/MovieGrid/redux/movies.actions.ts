@@ -1,16 +1,15 @@
 import {
   FetchErrorAction,
   FetchStartAction,
-  FetchSuccessAction,
-} from "./models/FetchActionModel";
-import { MoviesData } from "./models/MovieModel";
+  FetchSuccessAction, 
+} from "../types/FetchActions";
+import { MoviesData } from "../types/Movie";
 import {
   FETCH_MOVIES_START,
   FETCH_MOVIES_SUCCESS,
   FETCH_MOVIES_FAILURE,
 } from "./movies.events";
-import { fetchData } from "./utils/fetchMovies";
-import { Movies } from "./utils/Movies";
+import { fetchData } from "../utils/fetchMovies";
 
 const fetchMoviesStart = (): FetchStartAction => ({
   type: FETCH_MOVIES_START,

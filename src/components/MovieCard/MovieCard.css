@@ -2,3 +2,7 @@
   max-width: 30%;
   padding: 20px;
 }
+
+.movie-card > img {
+  width: 100%;
+}

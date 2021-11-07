@@ -1,37 +1,35 @@
-import { MoviesResults } from "../models/MovieModel";
+import { MoviesResults } from "../types/Movie";
 
-export const Movies = (movie: MoviesResults): MoviesResults | {} => {
-  if (typeof movie !== "object") return {};
+export class Movie {
+  public genre_ids?: number[];
+  public title: string;
+  public poster_path?: string | null;
+  public adult: boolean;
+  public overview: string | undefined;
+  public release_date: string;
+  public id?: number;
+  public original_title: string;
+  public original_language: string;
+  public backdrop_path?: string;
+  public popularity?: number;
+  public vote_count?: number;
+  public video?: boolean;
+  public vote_average?: number;
 
-  const poster_path = movie.poster_path || undefined;
-  const adult = movie.adult || false;
-  const overview = movie.overview || "";
-  const release_date = movie.release_date || "";
-  const genre_ids = movie.genre_ids || [];
-  const id = movie.id || null;
-  const original_title = movie.original_title || "";
-  const original_language = movie.original_language || "";
-  const title = movie.title || "";
-  const backdrop_path = movie.backdrop_path || "";
-  const popularity = movie.popularity || null;
-  const vote_count = movie.vote_count || null;
-  const video = movie.video || false;
-  const vote_average = movie.vote_average || null;
-
-  return {
-    poster_path,
-    adult,
-    overview,
-    release_date,
-    genre_ids,
-    id,
-    original_title,
-    original_language,
-    title,
-    backdrop_path,
-    popularity,
-    vote_count,
-    video,
-    vote_average,
-  };
-};
+  constructor(data: MoviesResults) {
+    this.poster_path = data?.poster_path || null;
+    this.title = data?.title || "";
+    this.id = data?.id || 0;
+    this.adult = data?.adult || false;
+    this.overview = data?.overview || "";
+    this.release_date = data?.release_date || "";
+    this.genre_ids = Array.isArray(data?.genre_ids) ? data.genre_ids : [];
+    this.original_title = data?.original_title || "";
+    this.original_language = data?.original_language || "";
+    this.backdrop_path = data?.backdrop_path || "";
+    this.popularity = data?.popularity || 0;
+    this.vote_count = data?.vote_count || 0;
+    this.video = data?.video || false;
+    this.vote_average = data?.vote_average || 0;
+  }
+}
