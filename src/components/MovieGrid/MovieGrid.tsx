@@ -9,6 +9,7 @@ import { fetchMovies } from "./redux/movies.actions";
 import { errors as Errors } from "../../config/errors";
 
 import "./MovieGrid.css";
+import NavBar from "../NavBar";
 
 const MovieGrid: React.FC = () => {
   const dispatch = useDispatch();
