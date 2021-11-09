@@ -4,12 +4,12 @@ import { useLocation } from "react-router";
 
 import { errors as Errors } from "../../../../config/errors";
 import { paths as Paths } from "../../../../config/paths";
-import { usePrevious } from "../../../../hooks/usePrevious";
 import { RootState } from "../../../../store/store";
 import { fetchMovies } from "../../../MovieGrid/redux/movies.actions";
 
 import Button from "../../../Button";
 import NavigationLink from "../NavigationLink";
+import { usePrevious } from "../../../../hooks/usePrevious";
 
 const NavigationList: React.FC = () => {
   const INITIAL_PAGE_NUMBER = 1;
@@ -17,20 +17,33 @@ const NavigationList: React.FC = () => {
   const dispatch = useDispatch();
   const { pathname: currentPathName } = useLocation();
   const { movies } = useSelector((state: RootState) => state.movies);
-
+  const previousPathName = useSelector(
+    (state: RootState) => state.movies.pathName
+  );
   const [pageNumber, setPageNumber] = useState(INITIAL_PAGE_NUMBER);
-
-  const previousPathName = usePrevious(window.location.pathname);
   const previousPageNumber = usePrevious(pageNumber);
+
+  const onNextMoviePage = () => {
+    setPageNumber((previousPage) => previousPage + 1);
+  };
+
+  const onPreviousMoviePage = () => {
+    setPageNumber((previousPage) => previousPage - 1);
+  };
 
   useEffect(() => {
     if (previousPathName !== currentPathName) {
-      setPageNumber((previousPage) => (previousPage = INITIAL_PAGE_NUMBER));
+      setPageNumber(() => INITIAL_PAGE_NUMBER);
     }
 
     if (previousPageNumber !== pageNumber) {
       dispatch(
-        fetchMovies(currentPathName, Errors.fetchErrors.GENERIC, pageNumber)
+        fetchMovies(
+          currentPathName,
+          Errors.fetchErrors.GENERIC,
+          pageNumber,
+          previousPathName
+        )
       );
     }
   }, [
@@ -40,14 +53,6 @@ const NavigationList: React.FC = () => {
     previousPageNumber,
     previousPathName,
   ]);
-
-  const onNextMoviePage = () => {
-    setPageNumber((previousPage) => previousPage + 1);
-  };
-
-  const onPreviousMoviePage = () => {
-    setPageNumber((previousPage) => previousPage - 1);
-  };
 
   const totalPages = movies?.total_pages || 0;
   const currentPage = movies?.page || 0;

@@ -4,6 +4,8 @@ import {
   FETCH_MOVIES_START,
   FETCH_MOVIES_SUCCESS,
   FETCH_MOVIES_FAILURE,
+  SET_CURRENT_PAGE,
+  SET_CURRENT_PATH_NAME,
 } from "./movies.events";
 import { Movie } from "../utils/Movies";
 
@@ -11,12 +13,16 @@ interface MovieFetchingState {
   movies: null | MoviesData;
   isFetching: boolean;
   errorMessage: string | Object;
+  pathName: string;
+  page: number;
 }
 
 const initalState: MovieFetchingState = {
   movies: null,
   isFetching: false,
   errorMessage: "",
+  pathName: "",
+  page: 0,
 };
 
 const moviesReducer = (state = initalState, action: FetchActions) => {
@@ -45,6 +51,16 @@ const moviesReducer = (state = initalState, action: FetchActions) => {
         ...state,
         isFetching: false,
         errorMessage: action.payload,
+      };
+    case SET_CURRENT_PAGE:
+      return {
+        ...state,
+        page: action.payload,
+      };
+    case SET_CURRENT_PATH_NAME:
+      return {
+        ...state,
+        pathName: action.payload,
       };
     default:
       return state;

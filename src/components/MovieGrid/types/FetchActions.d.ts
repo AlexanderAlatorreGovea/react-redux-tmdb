@@ -14,7 +14,19 @@ export interface FetchErrorAction {
   payload: Error | null | string;
 }
 
+export interface SetCurrentPage {
+  type: string;
+  payload: number;
+}
+
+export interface SetCurrentPathName {
+  type: string;
+  payload: string;
+}
+
 export type FetchActions =
   | FetchStartAction
   | FetchSuccessAction
-  | FetchErrorAction;
+  | FetchErrorAction
+  | SetCurrentPage
+  | SetCurrentPathName;

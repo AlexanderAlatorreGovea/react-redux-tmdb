@@ -2,6 +2,8 @@ import {
   FetchErrorAction,
   FetchStartAction,
   FetchSuccessAction,
+  SetCurrentPage,
+  SetCurrentPathName,
 } from "../types/FetchActions";
 
 import { MoviesData } from "../types/Movie";
@@ -9,6 +11,8 @@ import {
   FETCH_MOVIES_START,
   FETCH_MOVIES_SUCCESS,
   FETCH_MOVIES_FAILURE,
+  SET_CURRENT_PAGE,
+  SET_CURRENT_PATH_NAME,
 } from "./movies.events";
 import { fetchData } from "../utils/fetchMovies";
 import { pathnameToMovieType } from "../utils/pathnameToMovieType";
@@ -27,18 +31,31 @@ const fetchMoviesFailure = (errorMessage: string): FetchErrorAction => ({
   payload: errorMessage,
 });
 
+export const setCurrentPage = (page: number): SetCurrentPage => ({
+  type: SET_CURRENT_PAGE,
+  payload: page,
+});
+ 
+export const setCurrentPathName = (pathName: string): SetCurrentPathName => ({
+  type: SET_CURRENT_PATH_NAME,
+  payload: pathName,
+});
+
 export const fetchMovies = (
-  slug: string,
+  currentPathName: string,
   errorMessage: string,
-  pageNumber?: number | undefined
+  currentPageNumber?: number | undefined,
+  previousPathName?: string
 ) => {
   return async (dispatch: (arg0: { type: string }) => void) => {
     dispatch(fetchMoviesStart());
-    
-    try {
-      const movieType = pathnameToMovieType(slug, pageNumber);
-      const movies = await fetchData(movieType, errorMessage);
+    dispatch(setCurrentPathName(currentPathName));
 
+    try {
+      const movieType = pathnameToMovieType(currentPathName, currentPageNumber);
+      const movies = await fetchData(movieType, errorMessage);
+      
+      dispatch(setCurrentPage(movies.page))
       dispatch(fetchMoviesSuccess(movies));
     } catch (error: any) {
       const errorMessage = error?.status_message;

@@ -9,7 +9,6 @@ import { fetchMovies } from "./redux/movies.actions";
 import { errors as Errors } from "../../config/errors";
 
 import "./MovieGrid.css";
-import NavBar from "../NavBar";
 
 const MovieGrid: React.FC = () => {
   const dispatch = useDispatch();
@@ -18,10 +17,8 @@ const MovieGrid: React.FC = () => {
   );
   const { pathname } = useLocation();
 
-  const STARTING_PAGE = 1;
-
   useEffect(() => {
-    dispatch(fetchMovies(pathname, Errors.fetchErrors.GENERIC, STARTING_PAGE));
+    dispatch(fetchMovies(pathname, Errors.fetchErrors.GENERIC));
   }, [dispatch, pathname]);
 
   const moviesFinishedLoading = !isFetching && movies;
