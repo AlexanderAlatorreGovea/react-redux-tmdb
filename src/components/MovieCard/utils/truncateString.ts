@@ -9,7 +9,7 @@ export const truncateTitle = (title: string): string => {
   return title;
 };
 
-const formatTruncatedTitle = (
+export const formatTruncatedTitle = (
   title: string,
   MAXIMUM_ALLOWED_LENGTH: number
 ): string => {

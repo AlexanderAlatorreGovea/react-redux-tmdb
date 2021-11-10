@@ -20,9 +20,7 @@ const NavigationList: React.FC = () => {
   const previousPathName = useSelector(
     (state: RootState) => state.movies.pathName
   );
-  //   const previousPageNumber = useSelector(
-  //     (state: RootState) => state.movies.page
-  //   );
+
   const [pageNumber, setPageNumber] = useState(INITIAL_PAGE_NUMBER);
   const previousPageNumber = usePrevious(pageNumber);
 
