@@ -22,7 +22,7 @@ const initalState: MovieFetchingState = {
   isFetching: false,
   errorMessage: "",
   pathName: "",
-  page: 0,
+  page: 1,
 };
 
 const moviesReducer = (state = initalState, action: FetchActions) => {

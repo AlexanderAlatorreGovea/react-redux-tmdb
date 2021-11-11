@@ -16,7 +16,7 @@ export interface FetchErrorAction {
 
 export interface SetCurrentPage {
   type: string;
-  payload: number;
+  payload?: number | undefined;
 }
 
 export interface SetCurrentPathName {

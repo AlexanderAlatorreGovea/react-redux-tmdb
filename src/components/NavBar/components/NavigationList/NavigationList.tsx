@@ -1,64 +1,35 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router";
 
-import { errors as Errors } from "../../../../config/errors";
 import { paths as Paths } from "../../../../config/paths";
 import { RootState } from "../../../../store/store";
-import { fetchMovies } from "../../../MovieGrid/redux/movies.actions";
 
 import Button from "../../../Button";
 import NavigationLink from "../NavigationLink";
-import { usePrevious } from "../../../../hooks/usePrevious";
+
+import {
+  setCurrentPage,
+  setNextPage,
+  setPreviousPage,
+} from "../../../MovieGrid/redux/movies.actions";
 
 const NavigationList: React.FC = () => {
-  const INITIAL_PAGE_NUMBER = 1;
-
   const dispatch = useDispatch();
-  const { pathname: currentPathName } = useLocation();
-  const { movies } = useSelector((state: RootState) => state.movies);
-  const previousPathName = useSelector(
-    (state: RootState) => state.movies.pathName
-  );
-
-  const [pageNumber, setPageNumber] = useState(INITIAL_PAGE_NUMBER);
-  const previousPageNumber = usePrevious(pageNumber);
+  const { movies, page } = useSelector((state: RootState) => state.movies);
 
   const onNextMoviePage = () => {
-    setPageNumber((previousPage) => previousPage + 1);
+    dispatch(setNextPage(page));
   };
 
   const onPreviousMoviePage = () => {
-    setPageNumber((previousPage) => previousPage - 1);
+    dispatch(setPreviousPage(page));
   };
-
-  useEffect(() => {
-    if (previousPathName !== currentPathName) {
-      setPageNumber(() => INITIAL_PAGE_NUMBER);
-    }
-
-    if (previousPageNumber !== pageNumber) {
-      dispatch(
-        fetchMovies(
-          currentPathName,
-          Errors.fetchErrors.GENERIC,
-          pageNumber,
-          previousPathName
-        )
-      );
-    }
-  }, [
-    currentPathName,
-    dispatch,
-    pageNumber,
-    previousPageNumber,
-    previousPathName,
-  ]);
 
   const totalPages = movies?.total_pages || 0;
   const currentPage = movies?.page || 0;
   const isNextButtonDisabled = currentPage === totalPages;
   const isPrevButtonDisabled = currentPage === 1;
+
 
   return (
     <nav>

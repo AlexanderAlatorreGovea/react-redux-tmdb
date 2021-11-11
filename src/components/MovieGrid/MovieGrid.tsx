@@ -4,22 +4,36 @@ import { useLocation } from "react-router";
 
 import { RootState } from "../../store/store";
 import MovieCard from "../MovieCard";
-import { fetchMovies } from "./redux/movies.actions";
+import { fetchMovies, setCurrentPage } from "./redux/movies.actions";
 
 import { errors as Errors } from "../../config/errors";
 
 import "./MovieGrid.css";
 
 const MovieGrid: React.FC = () => {
+  const INITIAL_PAGE_NUMBER = 1;
   const dispatch = useDispatch();
-  const { movies, isFetching, errorMessage } = useSelector(
+  const { movies, isFetching, errorMessage, page } = useSelector(
     (state: RootState) => state.movies
   );
-  const { pathname } = useLocation();
+  const { pathname: currentPathName } = useLocation();
+  const previousPathName = useSelector(
+    (state: RootState) => state.movies.pathName
+  );
 
   useEffect(() => {
-    dispatch(fetchMovies(pathname, Errors.fetchErrors.GENERIC));
-  }, [dispatch, pathname]);
+    dispatch(
+      fetchMovies(
+        currentPathName,
+        Errors.fetchErrors.GENERIC,
+        page,
+        previousPathName
+      )
+    );
+    if (previousPathName !== currentPathName) {
+      dispatch(setCurrentPage(INITIAL_PAGE_NUMBER));
+    }
+  }, [currentPathName, dispatch, errorMessage, page, previousPathName]);
 
   const moviesFinishedLoading = !isFetching && movies;
 

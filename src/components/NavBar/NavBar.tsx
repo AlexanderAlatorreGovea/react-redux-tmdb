@@ -4,7 +4,7 @@ import NavigationList from "./components/NavigationList";
 const NavBar: React.FC = () => {
   return (
     <header>
-      <NavigationList />
+      <NavigationList /> 
     </header>
   );
 };

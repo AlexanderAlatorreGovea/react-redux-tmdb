@@ -31,7 +31,7 @@ export const fetchMoviesFailure = (errorMessage: string): FetchErrorAction => ({
   payload: errorMessage,
 });
 
-export const setCurrentPage = (page: number): SetCurrentPage => ({
+export const setCurrentPage = (page: number | undefined): SetCurrentPage => ({
   type: SET_CURRENT_PAGE,
   payload: page,
 });
@@ -43,7 +43,7 @@ export const setNextPage = (page: number): SetCurrentPage => ({
 
 export const setPreviousPage = (page: number): SetCurrentPage => ({
   type: SET_CURRENT_PAGE,
-  payload: page + 1,
+  payload: page - 1,
 });
 
 export const setCurrentPathName = (pathName: string): SetCurrentPathName => ({
@@ -51,26 +51,25 @@ export const setCurrentPathName = (pathName: string): SetCurrentPathName => ({
   payload: pathName,
 });
 
-// export const fetchMovies = (
-//   currentPathName: string,
-//   errorMessage: string,
-//   currentPageNumber?: number | undefined,
-//   previousPathName?: string
-// ) => {
-//   return async (dispatch: (arg0: { type: string }) => void) => {
-//     dispatch(fetchMoviesStart());
-//     dispatch(setCurrentPathName(currentPathName));
+export const fetchMovies = (
+  currentPathName: string,
+  errorMessage: string,
+  currentPageNumber?: number | undefined,
+  previousPathName?: string
+) => {
+  return async (dispatch: (arg0: { type: string }) => void) => {
+    dispatch(fetchMoviesStart());
+    dispatch(setCurrentPathName(currentPathName));
 
-//     try {
-//       const movieType = pathnameToMovieType(currentPathName, currentPageNumber);
-//       const movies = await fetchData(movieType, errorMessage);
+    try {
+      const movieType = pathnameToMovieType(currentPathName, currentPageNumber);
+      const movies = await fetchData(movieType, errorMessage);
 
-//       dispatch(setCurrentPage(movies.page));
-//       dispatch(fetchMoviesSuccess(movies));
-//     } catch (error: any) {
-//       const errorMessage = error?.status_message;
-//       console.error(errorMessage);
-//       dispatch(fetchMoviesFailure(errorMessage));
-//     }
-//   };
-// };
+      dispatch(fetchMoviesSuccess(movies));
+    } catch (error: any) {
+      const errorMessage = error?.status_message;
+      console.error(errorMessage);
+      dispatch(fetchMoviesFailure(errorMessage));
+    }
+  };
+};
