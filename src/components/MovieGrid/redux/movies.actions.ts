@@ -17,16 +17,16 @@ import {
 import { fetchData } from "../utils/fetchMovies";
 import { pathnameToMovieType } from "../utils/pathnameToMovieType";
 
-const fetchMoviesStart = (): FetchStartAction => ({
+export const fetchMoviesStart = (): FetchStartAction => ({
   type: FETCH_MOVIES_START,
 });
 
-const fetchMoviesSuccess = (movies: MoviesData): FetchSuccessAction => ({
+export const fetchMoviesSuccess = (movies: MoviesData): FetchSuccessAction => ({
   type: FETCH_MOVIES_SUCCESS,
   payload: movies,
 });
 
-const fetchMoviesFailure = (errorMessage: string): FetchErrorAction => ({
+export const fetchMoviesFailure = (errorMessage: string): FetchErrorAction => ({
   type: FETCH_MOVIES_FAILURE,
   payload: errorMessage,
 });
@@ -35,32 +35,42 @@ export const setCurrentPage = (page: number): SetCurrentPage => ({
   type: SET_CURRENT_PAGE,
   payload: page,
 });
- 
+
+export const setNextPage = (page: number): SetCurrentPage => ({
+  type: SET_CURRENT_PAGE,
+  payload: page + 1,
+});
+
+export const setPreviousPage = (page: number): SetCurrentPage => ({
+  type: SET_CURRENT_PAGE,
+  payload: page + 1,
+});
+
 export const setCurrentPathName = (pathName: string): SetCurrentPathName => ({
   type: SET_CURRENT_PATH_NAME,
   payload: pathName,
 });
 
-export const fetchMovies = (
-  currentPathName: string,
-  errorMessage: string,
-  currentPageNumber?: number | undefined,
-  previousPathName?: string
-) => {
-  return async (dispatch: (arg0: { type: string }) => void) => {
-    dispatch(fetchMoviesStart());
-    dispatch(setCurrentPathName(currentPathName));
+// export const fetchMovies = (
+//   currentPathName: string,
+//   errorMessage: string,
+//   currentPageNumber?: number | undefined,
+//   previousPathName?: string
+// ) => {
+//   return async (dispatch: (arg0: { type: string }) => void) => {
+//     dispatch(fetchMoviesStart());
+//     dispatch(setCurrentPathName(currentPathName));
 
-    try {
-      const movieType = pathnameToMovieType(currentPathName, currentPageNumber);
-      const movies = await fetchData(movieType, errorMessage);
-      
-      dispatch(setCurrentPage(movies.page))
-      dispatch(fetchMoviesSuccess(movies));
-    } catch (error: any) {
-      const errorMessage = error?.status_message;
-      console.error(errorMessage);
-      dispatch(fetchMoviesFailure(errorMessage));
-    }
-  };
-};
+//     try {
+//       const movieType = pathnameToMovieType(currentPathName, currentPageNumber);
+//       const movies = await fetchData(movieType, errorMessage);
+
+//       dispatch(setCurrentPage(movies.page));
+//       dispatch(fetchMoviesSuccess(movies));
+//     } catch (error: any) {
+//       const errorMessage = error?.status_message;
+//       console.error(errorMessage);
+//       dispatch(fetchMoviesFailure(errorMessage));
+//     }
+//   };
+// };

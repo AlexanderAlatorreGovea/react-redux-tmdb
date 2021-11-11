@@ -11,7 +11,7 @@ export interface FetchSuccessAction {
 
 export interface FetchErrorAction {
   type: string;
-  payload: Error | null | string;
+  payload?: Error | string;
 }
 
 export interface SetCurrentPage {

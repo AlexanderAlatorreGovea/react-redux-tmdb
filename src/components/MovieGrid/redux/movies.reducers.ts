@@ -37,7 +37,6 @@ const moviesReducer = (state = initalState, action: FetchActions) => {
       return {
         ...state,
         movies: {
-          ...movies,
           page: movies?.page || 0,
           results: movies?.results.map((movie: any) => new Movie(movie)),
           dates: movies?.dates || {},
