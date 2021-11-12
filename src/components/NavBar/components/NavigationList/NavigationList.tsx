@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { paths as Paths } from "../../../../config/paths";
@@ -8,7 +8,6 @@ import Button from "../../../Button";
 import NavigationLink from "../NavigationLink";
 
 import {
-  setCurrentPage,
   setNextPage,
   setPreviousPage,
 } from "../../../MovieGrid/redux/movies.actions";
@@ -30,10 +29,9 @@ const NavigationList: React.FC = () => {
   const isNextButtonDisabled = currentPage === totalPages;
   const isPrevButtonDisabled = currentPage === 1;
 
-
   return (
     <nav>
-      <u>
+      <div>
         <p>Total Pages: {movies && totalPages}</p>
         <p>Current Page: {movies && currentPage}</p>
         <Button disabled={isPrevButtonDisabled} onClick={onPreviousMoviePage}>
@@ -47,7 +45,7 @@ const NavigationList: React.FC = () => {
         <NavigationLink label="Top Rated" path={Paths.topRatedMovies} />
         <NavigationLink label="Popular" path={Paths.popularMovies} />
         <NavigationLink label="Now Playing" path={Paths.nowPlayingMovies} />
-      </u>
+      </div>
     </nav>
   );
 };
