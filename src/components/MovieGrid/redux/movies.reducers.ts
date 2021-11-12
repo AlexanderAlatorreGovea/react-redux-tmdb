@@ -1,13 +1,14 @@
 import { FetchActions } from "../types/FetchActions";
 import { MoviesData } from "../types/Movie";
+import { Movie } from "../utils/Movies";
+// 1 line or multi line with single import per line
 import {
+  FETCH_MOVIES_FAILURE,
   FETCH_MOVIES_START,
   FETCH_MOVIES_SUCCESS,
-  FETCH_MOVIES_FAILURE,
   SET_CURRENT_PAGE,
-  SET_CURRENT_PATH_NAME,
+  SET_CURRENT_PATH_NAME
 } from "./movies.events";
-import { Movie } from "../utils/Movies";
 
 interface MovieFetchingState {
   movies: null | MoviesData;
@@ -17,7 +18,7 @@ interface MovieFetchingState {
   page: number;
 }
 
-const initalState: MovieFetchingState = {
+const initialState: MovieFetchingState = {
   movies: null,
   isFetching: false,
   errorMessage: "",
@@ -25,7 +26,7 @@ const initalState: MovieFetchingState = {
   page: 1,
 };
 
-const moviesReducer = (state = initalState, action: FetchActions) => {
+const moviesReducer = (state = initialState, action: FetchActions) => {
   switch (action.type) {
     case FETCH_MOVIES_START:
       return {
@@ -34,6 +35,7 @@ const moviesReducer = (state = initalState, action: FetchActions) => {
       };
     case FETCH_MOVIES_SUCCESS:
       const movies = action.payload;
+
       return {
         ...state,
         movies: {

@@ -1,13 +1,19 @@
 import { render, screen } from "@testing-library/react";
-import Button from "../index";
+import { Button } from "../";
 
-describe("<Button />", () => {
+// name for describe
+// arrange act assert
+
+describe(Button.name, () => {
   it("should return the string 'hello' when the string is passed", () => {
+    // arrange
     const children = "hello";
     render(<Button>{children}</Button>);
 
+    // act
     const title = screen.getByText(/hello/i);
 
+    // assert
     expect(title).toBeInTheDocument();
   });
 

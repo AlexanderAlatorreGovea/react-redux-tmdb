@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router";
-
+import { errors as Errors } from "../../config/errors";
 import { RootState } from "../../store/store";
 import MovieCard from "../MovieCard";
+import "./MovieGrid.css";
 import { fetchMovies, setCurrentPage } from "./redux/movies.actions";
 
-import { errors as Errors } from "../../config/errors";
 
-import "./MovieGrid.css";
+
 
 const MovieGrid: React.FC = () => {
   const INITIAL_PAGE_NUMBER = 1;
@@ -27,9 +27,9 @@ const MovieGrid: React.FC = () => {
         currentPathName,
         Errors.fetchErrors.GENERIC,
         page,
-        previousPathName
       )
     );
+
     if (previousPathName !== currentPathName) {
       dispatch(setCurrentPage(INITIAL_PAGE_NUMBER));
     }

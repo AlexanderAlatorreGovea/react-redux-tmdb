@@ -3,19 +3,17 @@ import {
   FetchStartAction,
   FetchSuccessAction,
   SetCurrentPage,
-  SetCurrentPathName,
+  SetCurrentPathName
 } from "../types/FetchActions";
-
 import { MoviesData } from "../types/Movie";
-import {
-  FETCH_MOVIES_START,
-  FETCH_MOVIES_SUCCESS,
-  FETCH_MOVIES_FAILURE,
-  SET_CURRENT_PAGE,
-  SET_CURRENT_PATH_NAME,
-} from "./movies.events";
 import { fetchData } from "../utils/fetchMovies";
 import { pathnameToMovieType } from "../utils/pathnameToMovieType";
+import {
+  FETCH_MOVIES_FAILURE, FETCH_MOVIES_START,
+  FETCH_MOVIES_SUCCESS, SET_CURRENT_PAGE,
+  SET_CURRENT_PATH_NAME
+} from "./movies.events";
+
 
 export const fetchMoviesStart = (): FetchStartAction => ({
   type: FETCH_MOVIES_START,
@@ -55,7 +53,6 @@ export const fetchMovies = (
   currentPathName: string,
   errorMessage: string,
   currentPageNumber?: number | undefined,
-  previousPathName?: string
 ) => {
   return async (dispatch: (arg0: { type: string }) => void) => {
     dispatch(fetchMoviesStart());

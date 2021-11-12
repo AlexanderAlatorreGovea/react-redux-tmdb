@@ -4,6 +4,7 @@ export interface FetchStartAction {
   type: string;
   payload?: null;
 }
+// standardize the payload as an object to make more extensible
 export interface FetchSuccessAction {
   type: string;
   payload: MoviesData;

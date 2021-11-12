@@ -1,14 +1,18 @@
 import React from "react";
+// interface for props
+// export named 
+
+interface ButtonProps {
+  children: React.ReactNode;
+  onClick: () => void;
+  disabled: boolean;
+}
 
 const Button = ({
   children,
   onClick,
   disabled,
-}: {
-  children: React.ReactNode;
-  onClick: () => void;
-  disabled: boolean;
-}) => {
+}: ButtonProps) => {
   return (
     <button disabled={disabled} onClick={onClick}>
       {children}
@@ -16,4 +20,7 @@ const Button = ({
   );
 };
 
-export default Button;
+export {
+  Button
+};
+
