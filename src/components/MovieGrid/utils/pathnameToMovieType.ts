@@ -4,7 +4,7 @@ export const pathnameToMovieType = (
   pathname: string,
   pageNumber?: number | undefined
 ): string => {
-  switch (pathname) {
+  switch (pathname) { 
     case Paths.root:
     case Paths.upcomingMovies:
       return Paths.api.upcomingMovies(pageNumber);

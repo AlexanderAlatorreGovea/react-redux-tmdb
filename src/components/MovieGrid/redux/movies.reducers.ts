@@ -8,7 +8,7 @@ import {
   SET_CURRENT_PATH_NAME,
 } from "./movies.events";
 import { Movie } from "../utils/Movies";
-
+ 
 interface MovieFetchingState {
   movies: null | MoviesData;
   isFetching: boolean;

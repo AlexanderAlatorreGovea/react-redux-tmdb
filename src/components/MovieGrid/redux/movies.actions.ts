@@ -16,7 +16,8 @@ import {
 } from "./movies.events";
 import { fetchData } from "../utils/fetchMovies";
 import { pathnameToMovieType } from "../utils/pathnameToMovieType";
-
+import { errors as Error } from "../../../config/errors";
+ 
 export const fetchMoviesStart = (): FetchStartAction => ({
   type: FETCH_MOVIES_START,
 });
@@ -53,9 +54,7 @@ export const setCurrentPathName = (pathName: string): SetCurrentPathName => ({
 
 export const fetchMovies = (
   currentPathName: string,
-  errorMessage: string,
   currentPageNumber?: number | undefined,
-  previousPathName?: string
 ) => {
   return async (dispatch: (arg0: { type: string }) => void) => {
     dispatch(fetchMoviesStart());
@@ -63,8 +62,7 @@ export const fetchMovies = (
 
     try {
       const movieType = pathnameToMovieType(currentPathName, currentPageNumber);
-      const movies = await fetchData(movieType, errorMessage);
-
+      const movies = await fetchData(movieType, Error.fetchErrors.GENERIC);
       dispatch(fetchMoviesSuccess(movies));
     } catch (error: any) {
       const errorMessage = error?.status_message;
