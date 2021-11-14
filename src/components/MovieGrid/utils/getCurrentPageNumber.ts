@@ -1,7 +1,7 @@
 export const getCurrentPageNumber = (
   currentPathName: string,
   previousPathName: string,
-  currentPageNumber: number,
+  currentPageNumber: number
 ): number => {
   let pageNumber: number;
 

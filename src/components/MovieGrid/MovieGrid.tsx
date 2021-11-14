@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router";
 
@@ -15,11 +15,16 @@ const MovieGrid: React.FC = () => {
   );
   const { pathname: currentPathName } = useLocation();
 
-  useEffect(() => {
+  const getMemoizedMovies = useCallback(() => {
     dispatch(fetchMovies(currentPathName, page));
   }, [currentPathName, dispatch, page]);
 
+  useEffect(() => {
+    getMemoizedMovies();
+  }, [getMemoizedMovies]);
+
   const moviesFinishedLoading = !isFetching && movies;
+
   return (
     <div className="movie-grid">
       {isFetching && <div>loading...</div>}

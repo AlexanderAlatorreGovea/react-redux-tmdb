@@ -36,7 +36,7 @@ export const fetchMoviesFailure = (errorMessage: string): FetchErrorAction => ({
 
 export const setCurrentPage = (page: number | undefined): SetCurrentPage => ({
   type: SET_CURRENT_PAGE,
-  payload: 1,
+  payload: page,
 });
 
 export const setNextPage = (page: number): SetCurrentPage => ({
@@ -64,16 +64,21 @@ export const fetchMovies = (currentPathName: string, pageNumber: number) => {
       previousPathName,
       pageNumber
     );
- 
+
+    if (previousPathName !== currentPathName) {
+      dispatch(setCurrentPage(1));
+    }
+
     dispatch(fetchMoviesStart());
     dispatch(setCurrentPathName(currentPathName));
 
     try {
-      const movieType = pathnameToMovieType(currentPathName, currentPageNumber);
+      const movieType = await pathnameToMovieType(currentPathName, currentPageNumber);
       const movies = await fetchData(movieType, Error.fetchErrors.GENERIC);
+
       dispatch(fetchMoviesSuccess(movies));
     } catch (error: any) {
-      const errorMessage = error?.status_message;
+      const errorMessage = error?.message;
       console.error(errorMessage);
       dispatch(fetchMoviesFailure(errorMessage));
     }
