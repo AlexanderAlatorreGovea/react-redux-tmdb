@@ -19,6 +19,7 @@ import { pathnameToMovieType } from "../utils/pathnameToMovieType";
 import { getCurrentPageNumber } from "../utils/getCurrentPageNumber";
 
 import { errors as Error } from "../../../config/errors";
+import { Dispatch } from "react";
 
 export const fetchMoviesStart = (): FetchStartAction => ({
   type: FETCH_MOVIES_START,
@@ -39,22 +40,45 @@ export const setCurrentPage = (page: number | undefined): SetCurrentPage => ({
   payload: page,
 });
 
-export const setNextPage = (page: number): SetCurrentPage => ({
-  type: SET_CURRENT_PAGE,
-  payload: page + 1,
-});
+export const setNextPage = (
+  page: number,
+  dispatch: Dispatch<any>,
+  currentPathName: string
+): SetCurrentPage => {
+  const increasedPagePayload = page + 1;
 
-export const setPreviousPage = (page: number): SetCurrentPage => ({
-  type: SET_CURRENT_PAGE,
-  payload: page - 1,
-});
+  dispatch(fetchMovies(currentPathName, increasedPagePayload));
+
+  return {
+    type: SET_CURRENT_PAGE,
+    payload: increasedPagePayload,
+  };
+};
+
+export const setPreviousPage = (
+  page: number,
+  dispatch: Dispatch<any>,
+  currentPathName: string
+): SetCurrentPage => {
+  const decreasedPagePayload = page - 1;
+
+  dispatch(fetchMovies(currentPathName, decreasedPagePayload));
+
+  return {
+    type: SET_CURRENT_PAGE,
+    payload: decreasedPagePayload,
+  };
+};
 
 export const setCurrentPathName = (pathName: string): SetCurrentPathName => ({
   type: SET_CURRENT_PATH_NAME,
   payload: pathName,
 });
 
-export const fetchMovies = (currentPathName: string, pageNumber: number) => {
+export const fetchMovies = (
+  currentPathName: string,
+  pageNumber: number = 1
+) => {
   return async (dispatch: (arg0: { type: string }) => void, getState: any) => {
     const state = getState();
     const previousPathName = state.movies.pathName;
@@ -73,7 +97,7 @@ export const fetchMovies = (currentPathName: string, pageNumber: number) => {
     dispatch(setCurrentPathName(currentPathName));
 
     try {
-      const movieType = await pathnameToMovieType(currentPathName, currentPageNumber);
+      const movieType = pathnameToMovieType(currentPathName, currentPageNumber);
       const movies = await fetchData(movieType, Error.fetchErrors.GENERIC);
 
       dispatch(fetchMoviesSuccess(movies));

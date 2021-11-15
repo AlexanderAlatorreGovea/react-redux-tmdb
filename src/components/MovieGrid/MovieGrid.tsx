@@ -10,18 +10,14 @@ import "./MovieGrid.css";
 
 const MovieGrid: React.FC = () => {
   const dispatch = useDispatch();
-  const { movies, isFetching, errorMessage, page } = useSelector(
+  const { movies, isFetching, errorMessage } = useSelector(
     (state: RootState) => state.movies
   );
   const { pathname: currentPathName } = useLocation();
 
-  const getMemoizedMovies = useCallback(() => {
-    dispatch(fetchMovies(currentPathName, page));
-  }, [currentPathName, dispatch, page]);
-
   useEffect(() => {
-    getMemoizedMovies();
-  }, [getMemoizedMovies]);
+    dispatch(fetchMovies(currentPathName));
+  }, [currentPathName, dispatch]);
 
   const moviesFinishedLoading = !isFetching && movies;
 
