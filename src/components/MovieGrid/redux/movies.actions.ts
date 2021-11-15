@@ -1,3 +1,5 @@
+import { Dispatch } from "react";
+
 import {
   FetchErrorAction,
   FetchStartAction,
@@ -19,7 +21,6 @@ import { pathnameToMovieType } from "../utils/pathnameToMovieType";
 import { getCurrentPageNumber } from "../utils/getCurrentPageNumber";
 
 import { errors as Error } from "../../../config/errors";
-import { Dispatch } from "react";
 
 export const fetchMoviesStart = (): FetchStartAction => ({
   type: FETCH_MOVIES_START,
@@ -35,10 +36,14 @@ export const fetchMoviesFailure = (errorMessage: string): FetchErrorAction => ({
   payload: errorMessage,
 });
 
-export const setCurrentPage = (page: number | undefined): SetCurrentPage => ({
-  type: SET_CURRENT_PAGE,
-  payload: page,
-});
+export const resetPage = (): SetCurrentPage => {
+  const INITIAL_PAGE = 1;
+
+  return {
+    type: SET_CURRENT_PAGE,
+    payload: INITIAL_PAGE,
+  };
+};
 
 export const setNextPage = (
   page: number,
@@ -82,7 +87,6 @@ export const fetchMovies = (
   return async (dispatch: (arg0: { type: string }) => void, getState: any) => {
     const state = getState();
     const previousPathName = state.movies.pathName;
-
     const currentPageNumber = getCurrentPageNumber(
       currentPathName,
       previousPathName,
@@ -90,7 +94,7 @@ export const fetchMovies = (
     );
 
     if (previousPathName !== currentPathName) {
-      dispatch(setCurrentPage(1));
+      dispatch(resetPage());
     }
 
     dispatch(fetchMoviesStart());

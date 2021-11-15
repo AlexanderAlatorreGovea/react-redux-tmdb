@@ -1,7 +1,6 @@
 import React from "react";
 import { Route } from "react-router";
 import { BrowserRouter } from "react-router-dom";
-import Diffing from "./components/Diffing/Diffing";
 
 import MovieGrid from "./components/MovieGrid";
 import NavBar from "./components/NavBar";
@@ -13,7 +12,6 @@ const App: React.FC = () => {
       <div className="App">
         <h1>TMDB</h1>
         <NavBar /> 
-        <Route exact path={'/diff'} component={Diffing} />
         <Route exact path={Paths.root} component={MovieGrid} />
         <Route exact path={Paths.upcomingMovies} component={MovieGrid} />
         <Route exact path={Paths.nowPlayingMovies} component={MovieGrid} />

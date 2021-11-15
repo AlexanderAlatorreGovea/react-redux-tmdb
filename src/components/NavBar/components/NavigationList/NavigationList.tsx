@@ -9,7 +9,6 @@ import Button from "../../../Button";
 import NavigationLink from "../NavigationLink";
 
 import {
-  fetchMovies,
   setNextPage,
   setPreviousPage,
 } from "../../../MovieGrid/redux/movies.actions";
@@ -22,11 +21,6 @@ const NavigationList: React.FC = () => {
   );
   const { pathname: currentPathName } = useLocation();
 
-  const totalPages = movies?.total_pages;
-  const previousPage = movies?.page;
-  const isNextButtonDisabled = previousPage === totalPages;
-  const isPrevButtonDisabled = currentPage === DEFAULT_PAGE;
-
   const onNextMoviePage = () => {
     dispatch(setNextPage(currentPage, dispatch, currentPathName));
   };
@@ -35,11 +29,16 @@ const NavigationList: React.FC = () => {
     dispatch(setPreviousPage(currentPage, dispatch, currentPathName));
   };
 
+  const totalPages = movies?.total_pages || 0;
+  const previousPage = movies?.page || 0;
+  const isNextButtonDisabled = previousPage === totalPages;
+  const isPrevButtonDisabled = currentPage === DEFAULT_PAGE;
+
   return (
     <nav>
       <div>
-        <p>Total Pages: {movies && totalPages}</p>
-        <p>Current Page: {movies && currentPage}</p>
+        <p>Total Pages: {totalPages}</p>
+        <p>Current Page: {currentPage}</p>
         <Button disabled={isPrevButtonDisabled} onClick={onPreviousMoviePage}>
           Previous
         </Button>
