@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { DEFAULT_PAGE } from "./constants";
@@ -55,4 +55,4 @@ const NavigationList: React.FC = () => {
   );
 };
 
-export default NavigationList;
+export { NavigationList };

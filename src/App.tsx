@@ -4,14 +4,15 @@ import { BrowserRouter } from "react-router-dom";
 
 import MovieGrid from "./components/MovieGrid";
 import NavBar from "./components/NavBar";
+import Title from "./components/Title";
 import { paths as Paths } from "./config/paths";
 
 const App: React.FC = () => {
   return (
     <BrowserRouter>
       <div className="App">
-        <h1>TMDB</h1>
-        <NavBar /> 
+        <Title title="TMDB" />
+        <NavBar />
         <Route exact path={Paths.root} component={MovieGrid} />
         <Route exact path={Paths.upcomingMovies} component={MovieGrid} />
         <Route exact path={Paths.nowPlayingMovies} component={MovieGrid} />

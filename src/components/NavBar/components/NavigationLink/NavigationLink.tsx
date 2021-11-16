@@ -3,26 +3,19 @@ import { NavLink } from "react-router-dom";
 
 import { NavigationLinkProps } from "../../types/NavigationLink";
 
-import './NavigationLink.css';
+import "./NavigationLink.css";
 
-const NavigationLink: React.FC<NavigationLinkProps> = ({
-  path,
-  label
-}) => {
+const NavigationLink = ({ path, label }: NavigationLinkProps) => {
+  const getNavClass = (isActive: boolean) =>
+    "nav-link" + (!isActive ? " unselected" : "");
+
   return (
-    <>
-      <li >
-        <NavLink
-          className={(isActive) =>
-            "nav-link" + (!isActive ? " unselected" : "")
-          }
-          to={path}
-        >
-          {label}
-        </NavLink>
-      </li>
-    </>
+    <li>
+      <NavLink className={getNavClass} to={path}>
+        {label}
+      </NavLink>
+    </li>
   );
 };
 
-export default NavigationLink;
+export { NavigationLink };

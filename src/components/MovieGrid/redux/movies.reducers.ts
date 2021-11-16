@@ -17,7 +17,7 @@ interface MovieFetchingState {
   page: number;
 }
 
-const initalState: MovieFetchingState = {
+const initialState: MovieFetchingState = {
   movies: null,
   isFetching: false,
   errorMessage: "",
@@ -25,7 +25,7 @@ const initalState: MovieFetchingState = {
   page: 1,
 };
 
-const moviesReducer = (state = initalState, action: FetchActions) => {
+const moviesReducer = (state = initialState, action: FetchActions) => {
   switch (action.type) {
     case FETCH_MOVIES_START:
       return {

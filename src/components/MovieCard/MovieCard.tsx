@@ -1,14 +1,12 @@
-import React from "react";
-
 import { images as ImageConfig } from "../../config/images";
 import { MovieCardProps } from "./types/MovieCard";
 import { MoviesResults } from "../MovieGrid/types/Movie";
 
 import { truncateTitle } from "./utils/truncateString";
 
-import "./MovieCard.css"; 
+import "./MovieCard.css";
 
-const MovieCard: React.FC<MovieCardProps> = ({ movies }) => {
+const MovieCard = ({ movies }: MovieCardProps) => {
   return (
     <>
       {movies.map(
@@ -28,7 +26,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ movies }) => {
                 alt={title}
               />
               <p>{truncatedTitle}</p>
-              <p>Avergage vote: {vote_average}</p>
+              <p>Average vote: {vote_average}</p>
               <p>Total votes: {vote_count}</p>
             </div>
           );
@@ -38,4 +36,4 @@ const MovieCard: React.FC<MovieCardProps> = ({ movies }) => {
   );
 };
 
-export default MovieCard;
+export { MovieCard };
