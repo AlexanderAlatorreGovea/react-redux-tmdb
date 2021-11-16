@@ -1,5 +1,5 @@
 import React from "react";
-import { Route } from "react-router";
+import { Route, Switch } from "react-router";
 import { BrowserRouter } from "react-router-dom";
 
 import MovieGrid from "./components/MovieGrid";
@@ -13,11 +13,13 @@ const App: React.FC = () => {
       <div className="App">
         <Title title="TMDB" />
         <NavBar />
-        <Route exact path={Paths.root} component={MovieGrid} />
-        <Route exact path={Paths.upcomingMovies} component={MovieGrid} />
-        <Route exact path={Paths.nowPlayingMovies} component={MovieGrid} />
-        <Route exact path={Paths.popularMovies} component={MovieGrid} />
-        <Route exact path={Paths.topRatedMovies} component={MovieGrid} />
+        <Switch>
+          <Route exact path={Paths.root} component={MovieGrid} />
+          <Route exact path={Paths.upcomingMovies} component={MovieGrid} />
+          <Route exact path={Paths.nowPlayingMovies} component={MovieGrid} />
+          <Route exact path={Paths.popularMovies} component={MovieGrid} />
+          <Route exact path={Paths.topRatedMovies} component={MovieGrid} />
+        </Switch>
       </div>
     </BrowserRouter>
   );
