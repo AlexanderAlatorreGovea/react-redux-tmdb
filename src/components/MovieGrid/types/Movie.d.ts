@@ -15,15 +15,17 @@ interface MoviesResults {
   vote_average?: number;
 }
 
+interface Dates {
+  maximum: string;
+  minimum: string;
+}
+
 interface MoviesData {
   page: number;
   results: MoviesResults[];
-  dates: {
-    maximum: string;
-    minimum: string;
-  };
+  dates: Dates;
   total_pages: number;
   total_results: number;
 }
 
-export { MoviesResults, MoviesData };
+export { Dates, MoviesResults, MoviesData };

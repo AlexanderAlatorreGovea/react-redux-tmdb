@@ -21,6 +21,7 @@ import { pathnameToMovieType } from "../utils/pathnameToMovieType";
 import { getCurrentPageNumber } from "../utils/getCurrentPageNumber";
 
 import { errors as Error } from "../../../config/errors";
+import { Result } from "../models/Result";
 
 export const fetchMoviesStart = (): FetchStartAction => ({
   type: FETCH_MOVIES_START,
@@ -102,8 +103,9 @@ export const fetchMovies = (
 
     try {
       const movieType = pathnameToMovieType(currentPathName, currentPageNumber);
-      const movies = await fetchData(movieType, Error.fetchErrors.GENERIC);
-
+      const result = await fetchData(movieType, Error.fetchErrors.GENERIC);
+      const movies = new Result(result);
+      
       dispatch(fetchMoviesSuccess(movies));
     } catch (error: any) {
       const errorMessage = error?.message;

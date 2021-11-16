@@ -7,7 +7,6 @@ import {
   SET_CURRENT_PAGE,
   SET_CURRENT_PATH_NAME,
 } from "./movies.events";
-import { Movie } from "../utils/Movies";
 
 interface MovieFetchingState {
   movies: null | MoviesData;
@@ -33,17 +32,10 @@ const moviesReducer = (state = initialState, action: FetchActions) => {
         isFetching: true,
       };
     case FETCH_MOVIES_SUCCESS:
-      const movies = action.payload;
       return {
         ...state,
-        movies: {
-          page: movies?.page || 0,
-          results: movies?.results.map((movie: any) => new Movie(movie)),
-          dates: movies?.dates || {},
-          total_pages: movies?.total_pages || 0,
-          total_results: movies?.total_results || 0,
-        },
-        isFetching: false
+        movies: action.payload,
+        isFetching: false,
       };
     case FETCH_MOVIES_FAILURE:
       return {

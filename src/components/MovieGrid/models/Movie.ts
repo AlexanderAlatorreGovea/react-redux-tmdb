@@ -5,7 +5,7 @@ export class Movie {
   public title: string;
   public poster_path?: string | null;
   public adult: boolean;
-  public overview: string | undefined;
+  public overview: string | undefined; 
   public release_date: string;
   public id?: number;
   public original_title: string;
