@@ -1,11 +1,12 @@
 import { MoviesResults } from "../types/Movie";
+import { TypeChecker } from "../../../utils/_TypeChecker";
 
-export class Movie {
+export class Movie extends TypeChecker {
   public genre_ids?: number[];
   public title: string;
   public poster_path?: string | null;
   public adult: boolean;
-  public overview: string | undefined; 
+  public overview: string | undefined;
   public release_date: string;
   public id?: number;
   public original_title: string;
@@ -17,13 +18,14 @@ export class Movie {
   public vote_average?: number;
 
   constructor(data: MoviesResults) {
+    super();
     this.poster_path = data?.poster_path || null;
     this.title = data?.title || "";
     this.id = data?.id || 0;
     this.adult = data?.adult || false;
     this.overview = data?.overview || "";
     this.release_date = data?.release_date || "";
-    this.genre_ids = Array.isArray(data?.genre_ids) ? data.genre_ids : [];
+    this.genre_ids = this.checkValue("array", [], "genre_ids", data.genre_ids);
     this.original_title = data?.original_title || "";
     this.original_language = data?.original_language || "";
     this.backdrop_path = data?.backdrop_path || "";

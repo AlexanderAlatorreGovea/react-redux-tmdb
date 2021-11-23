@@ -15,7 +15,7 @@ export class Result extends TypeChecker {
     this.results = this.checkValue("array", [], "results", data.results).map(
       (movie: MoviesResults) => new Movie(movie)
     );
-    this.dates = this.checkValue("array", [], "results", data.dates);
+    this.dates = this.checkValue("object", {}, "dates", data.dates);
     this.total_pages = data?.total_pages || 0;
     this.total_results = data?.total_results || 0;
   }

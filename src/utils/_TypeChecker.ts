@@ -1,16 +1,13 @@
 export class TypeChecker {
-  public type: any;
-  public defaultValue: any;
-  public fieldName: any;
-  public value: any;
-
   public checkValue(type: any, defaultValue: any, fieldName: any, value: any) {
     if (type === "array" && !Array.isArray(value)) {
       console.warn(`Expected ${fieldName} to be array but got ${typeof value}`);
       return defaultValue;
     }
 
-    if (type === "array" && Array.isArray(value)) return value;
+    if (type === "array" && Array.isArray(value)) {
+      return value;
+    }
 
     if (type === "object" && Object.is(value, null)) {
       console.warn(`Expected ${fieldName} to be object but got null`);
@@ -29,7 +26,7 @@ export class TypeChecker {
 
     if (typeof value !== type) {
       console.warn(
-        `Expected ${fieldName} to be ${type} but got ${typeof this.value}`
+        `Expected ${fieldName} to be ${type} but got ${typeof value}`
       );
       return defaultValue;
     }
@@ -37,4 +34,3 @@ export class TypeChecker {
     return value;
   }
 }
-
