@@ -3,11 +3,11 @@ import { Movie } from "./Movie";
 import { TypeChecker } from "../../../utils/_TypeChecker";
 
 export class Result extends TypeChecker {
-  page: number;
-  results: MoviesResults[];
-  dates: Dates | any;
-  total_pages: number;
-  total_results: number;
+  public readonly page: number;
+  public readonly results: MoviesResults[];
+  public readonly dates: Dates | any;
+  public readonly total_pages: number;
+  public readonly total_results: number;
 
   constructor(data: MoviesData | any = {}) {
     super();
@@ -20,3 +20,4 @@ export class Result extends TypeChecker {
     this.total_results = data?.total_results || 0;
   }
 }
+ 

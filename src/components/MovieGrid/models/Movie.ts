@@ -2,20 +2,20 @@ import { MoviesResults } from "../types/Movie";
 import { TypeChecker } from "../../../utils/_TypeChecker";
 
 export class Movie extends TypeChecker {
-  public genre_ids?: number[];
-  public title: string;
-  public poster_path?: string | null;
-  public adult: boolean;
-  public overview: string | undefined;
-  public release_date: string;
-  public id?: number;
-  public original_title: string;
-  public original_language: string;
-  public backdrop_path?: string;
-  public popularity?: number;
-  public vote_count?: number;
-  public video?: boolean;
-  public vote_average?: number;
+  public readonly genre_ids?: number[];
+  public readonly title: string;
+  public readonly poster_path?: string | null;
+  public readonly adult: boolean;
+  public readonly overview: string | undefined;
+  public readonly release_date: string;
+  public readonly id?: number;
+  public readonly original_title: string;
+  public readonly original_language: string;
+  public readonly backdrop_path?: string;
+  public readonly popularity?: number;
+  public readonly vote_count?: number;
+  public readonly video?: boolean;
+  public readonly vote_average?: number;
 
   constructor(data: MoviesResults) {
     super();
