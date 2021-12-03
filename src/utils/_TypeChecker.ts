@@ -1,4 +1,6 @@
 export class TypeChecker {
+  returnedValue: unknown;
+
   public checkValue(type: any, defaultValue: any, fieldName: any, value: any) {
     if (type === "array" && !Array.isArray(value)) {
       console.warn(`Expected ${fieldName} to be array but got ${typeof value}`);
@@ -33,4 +35,6 @@ export class TypeChecker {
 
     return value;
   }
+
+
 }

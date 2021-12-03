@@ -1,32 +1,32 @@
 export const typeChecker =
   (type: unknown, defaultValue: unknown, fieldName: unknown) =>
-  (val: unknown) => {
-    if (type === "array" && !Array.isArray(val)) {
-      console.warn(`Expected ${fieldName} to be array but got ${typeof val}`);
+  (value: unknown) => {
+    if (type === "array" && !Array.isArray(value)) {
+      console.warn(`Expected ${fieldName} to be array but got ${typeof value}`);
       return defaultValue;
     }
 
-    if (type === "array" && Array.isArray(val)) return val;
+    if (type === "array" && Array.isArray(value)) return value;
 
-    if (type === "object" && Object.is(val, null)) {
+    if (type === "object" && Object.is(value, null)) {
       console.warn(`Expected ${fieldName} to be object but got null`);
       return defaultValue;
     }
 
-    if (type === "object" && Array.isArray(val)) {
+    if (type === "object" && Array.isArray(value)) {
       console.warn(`Expected ${fieldName} to be object but got array`);
       return defaultValue;
     }
 
-    if (typeof val !== type && Array.isArray(val)) {
+    if (typeof value !== type && Array.isArray(value)) {
       console.warn(`Expected ${fieldName} to be ${type} but got array`);
       return defaultValue;
     }
 
-    if (typeof val !== type) {
-      console.warn(`Expected ${fieldName} to be ${type} but got ${typeof val}`);
+    if (typeof value !== type) {
+      console.warn(`Expected ${fieldName} to be ${type} but got ${typeof value}`);
       return defaultValue;
     }
 
-    return val;
+    return value;
   };
