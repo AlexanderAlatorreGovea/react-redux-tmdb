@@ -1,7 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { DEFAULT_PAGE } from "./constants";
 import { paths as Paths } from "../../../../config/paths";
 import { RootState } from "../../../../store/store";
 
@@ -15,6 +14,7 @@ import {
 import { useLocation } from "react-router";
 
 const NavigationList: React.FC = () => {
+  const DEFAULT_PAGE = 1;
   const dispatch = useDispatch();
   const { movies, page: currentPage } = useSelector(
     (state: RootState) => state.movies
