@@ -12,9 +12,12 @@ export class Result extends TypeChecker {
   constructor(data: MoviesData | any = {}) {
     super();
     this.page = data?.page || 0;
-    this.results = this.checkValue("array", [], "results", data.results)
-      .map((movie: MoviesResults) => new Movie(movie));
-    this.dates = this.checkValue("object", {}, "dates", data.dates);
+    this.results = this.checkValue(
+      "array",
+      [],
+      "results"
+    )(data.results).map((movie: MoviesResults) => new Movie(movie));
+    this.dates = this.checkValue("object", {}, "dates")(data.dates);
     this.total_pages = data?.total_pages || 0;
     this.total_results = data?.total_results || 0;
   }

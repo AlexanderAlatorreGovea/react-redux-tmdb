@@ -16,7 +16,7 @@ export class Movie extends TypeChecker {
   public readonly vote_count?: number;
   public readonly video?: boolean;
   public readonly vote_average?: number;
-
+ 
   constructor(data: MoviesResults) {
     super();
     this.poster_path = data?.poster_path || null;
@@ -25,7 +25,7 @@ export class Movie extends TypeChecker {
     this.adult = data?.adult || false;
     this.overview = data?.overview || "";
     this.release_date = data?.release_date || "";
-    this.genre_ids = this.checkValue("array", [], "genre_ids", data.genre_ids);
+    this.genre_ids = this.checkValue("array", [], "genre_ids")(data.genre_ids);
     this.original_title = data?.original_title || "";
     this.original_language = data?.original_language || "";
     this.backdrop_path = data?.backdrop_path || "";
