@@ -1,7 +1,5 @@
 export class TypeChecker {
-  returnedValue: unknown;
-
-  public checkValue(type: any, defaultValue: any, fieldName: any) {
+  static checkValue(type: any, defaultValue: any, fieldName: any) {
     return (value: any) => {
       if (type === "array" && !Array.isArray(value)) {
         console.warn(
