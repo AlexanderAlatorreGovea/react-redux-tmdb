@@ -11,7 +11,7 @@ interface MoviesResults {
   backdrop_path?: string;
   popularity?: number;
   vote_count?: number;
-  video: boolean | false;
+  video: boolean;
   vote_average?: number;
 }
 
