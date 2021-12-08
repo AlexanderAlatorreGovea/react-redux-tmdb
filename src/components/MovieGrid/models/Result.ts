@@ -6,10 +6,10 @@ export class Result {
   private _getResults: <T>(value: T) => T;
   private _getDates: <T>(value: T) => T;
   public readonly page: number;
-  public readonly results: Record<string, MoviesResults>;
+  public readonly results: MoviesResults[];
   public readonly dates: Dates;
   public readonly total_pages: number;
-  public readonly total_results: number;
+  public readonly total_results: number; 
 
   constructor(data: MoviesData | any = {}) {
     this._getResults = TypeChecker.checkValue("array", [], "results");
