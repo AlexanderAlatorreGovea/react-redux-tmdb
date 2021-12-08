@@ -4,12 +4,12 @@ import thunk from "redux-thunk";
 
 import rootReducer from "./root-reducer";
 
-const middlewares = [thunk, logger];
+const middleware = [thunk, logger];
 
 export const store: Store<
   EmptyObject & 
   any
-> = createStore(rootReducer, applyMiddleware(...middlewares));
+> = createStore(rootReducer, applyMiddleware(...middleware));
 
 export default store;
 export type RootState = ReturnType<typeof store.getState>;

@@ -6,9 +6,9 @@ export type Paths = {
   popularMovies: string;
   nowPlayingMovies: string;
   api: {
-    upcomingMovies: (argument?: number | undefined) => string;
-    topRatedMovies: (argument?: number | undefined) => string;
-    popularMovies: (argument?: number | undefined) => string;
-    nowPlayingMovies: (argument?: number | undefined) => string;
+    upcomingMovies: (argument?: number) => string;
+    topRatedMovies: (argument?: number) => string;
+    popularMovies: (argument?: number) => string;
+    nowPlayingMovies: (argument?: number) => string;
   };
 };

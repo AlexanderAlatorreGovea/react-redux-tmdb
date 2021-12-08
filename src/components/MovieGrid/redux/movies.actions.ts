@@ -106,7 +106,7 @@ export const fetchMovies = (
 
     try {
       const movieType = pathnameToMovieType(currentPathName, currentPageNumber);
-      const result = await fetchData(movieType, Error.fetchErrors.GENERIC);
+      const result = await fetchData(movieType, Error.fetchErrors);
       const movies = new Result(result);
 
       dispatch(fetchMoviesSuccess(movies));
