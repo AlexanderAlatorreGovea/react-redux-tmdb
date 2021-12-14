@@ -13,7 +13,7 @@ import {
 } from "../../../MovieGrid/redux/movies.actions";
 import { useLocation } from "react-router";
 
-const NavigationList: React.FC = () => {
+const NavigationList = () => {
   const DEFAULT_PAGE = 1;
   const dispatch = useDispatch();
   const { movies, page: currentPage } = useSelector(

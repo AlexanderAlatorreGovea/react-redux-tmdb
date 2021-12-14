@@ -1,9 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-import { NavigationLinkProps } from "../../types/NavigationLink";
-
 import "./NavigationLink.css";
+
+export interface NavigationLinkProps {
+  path: string;
+  label: string;
+}
 
 const NavigationLink = ({ path, label }: NavigationLinkProps) => {
   const getNavClass = (isActive: boolean) =>

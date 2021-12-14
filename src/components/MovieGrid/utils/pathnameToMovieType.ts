@@ -19,6 +19,6 @@ export const pathnameToMovieType = (
       return Paths.api.nowPlayingMovies(pageNumber);
 
     default:
-      throw new Error(`${pathname} is not a valid emailType`);
+      throw new Error(`${pathname} is not a valid movie type.`);
   }
 };

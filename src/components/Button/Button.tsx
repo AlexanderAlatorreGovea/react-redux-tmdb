@@ -8,7 +8,7 @@ interface ButtonProps {
 
 const Button = ({ children, onClick, disabled }: ButtonProps) => {
   return (
-    <button name="alex" disabled={disabled} onClick={onClick}>
+    <button disabled={disabled} onClick={onClick}>
       {children}
     </button>
   );
