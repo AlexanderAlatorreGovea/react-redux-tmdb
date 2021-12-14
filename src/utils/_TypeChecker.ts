@@ -1,4 +1,6 @@
 export class TypeChecker {
+  private constructor() {}
+
   static checkValue<T, S>(
     type: string,
     defaultValue: unknown,
