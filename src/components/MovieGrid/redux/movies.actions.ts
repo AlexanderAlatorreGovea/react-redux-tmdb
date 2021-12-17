@@ -25,6 +25,7 @@ import { getCurrentPageNumber } from "../utils/getCurrentPageNumber";
 import { errors as Error } from "../../../config/errors";
 import { Result } from "../models/Result";
 import { RootState } from "../../../store/store";
+import { SetPage } from "./dtos/SetPage";
 
 export const fetchMoviesStart = (): FetchStartAction => ({
   type: FETCH_MOVIES_START,
@@ -49,12 +50,12 @@ export const resetPage = (): SetCurrentPage => {
   };
 };
 
-export const setNextPage = (
-  page: number,
-  dispatch: Dispatch<any>,
-  currentPathName: string
-): SetCurrentPage => {
-  const incrementPageNumber = page + 1;
+export const setNextPage = ({
+  currentPage,
+  currentPathName,
+  dispatch,
+}: SetPage): SetCurrentPage => {
+  const incrementPageNumber = currentPage + 1;
 
   dispatch(fetchMovies(currentPathName, incrementPageNumber));
 
@@ -64,12 +65,12 @@ export const setNextPage = (
   };
 };
 
-export const setPreviousPage = (
-  page: number,
-  dispatch: Dispatch<any>,
-  currentPathName: string
-): SetCurrentPage => {
-  const decrementPageNumber = page - 1;
+export const setPreviousPage = ({
+  currentPage,
+  currentPathName,
+  dispatch,
+}: SetPage): SetCurrentPage => {
+  const decrementPageNumber = currentPage - 1;
 
   dispatch(fetchMovies(currentPathName, decrementPageNumber));
 
@@ -84,11 +85,12 @@ export const setCurrentPathName = (pathName: string): SetCurrentPathName => ({
   payload: pathName,
 });
 
-export const fetchMovies = (
-  currentPathName: string,
-  pageNumber: number = 1
-): ThunkAction<void, RootState, unknown, AnyAction> => {
-  return async (dispatch, getState) => {
+export const fetchMovies =
+  (
+    currentPathName: string,
+    pageNumber: number = 1
+  ): ThunkAction<void, RootState, unknown, AnyAction> =>
+  async (dispatch, getState) => {
     const state = getState();
     const previousPathName = state.movies.pathName;
     const currentPageNumber = getCurrentPageNumber(
@@ -116,4 +118,3 @@ export const fetchMovies = (
       dispatch(fetchMoviesFailure(errorMessage));
     }
   };
-};

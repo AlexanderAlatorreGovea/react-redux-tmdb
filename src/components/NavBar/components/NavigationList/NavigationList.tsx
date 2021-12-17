@@ -21,12 +21,18 @@ const NavigationList = () => {
   );
   const { pathname: currentPathName } = useLocation();
 
+  const currentPageData = {
+    currentPage,
+    currentPathName,
+    dispatch,
+  };
+
   const onNextMoviePage = () => {
-    dispatch(setNextPage(currentPage, dispatch, currentPathName));
+    dispatch(setNextPage(currentPageData));
   };
 
   const onPreviousMoviePage = () => {
-    dispatch(setPreviousPage(currentPage, dispatch, currentPathName));
+    dispatch(setPreviousPage(currentPageData));
   };
 
   const totalPages = movies?.total_pages || 0;
