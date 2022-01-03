@@ -25,7 +25,7 @@ import { getCurrentPageNumber } from "../utils/getCurrentPageNumber";
 import { errors as Error } from "../../../config/errors";
 import { Result } from "../models/Result";
 import { RootState } from "../../../store/store";
-import { SetPage } from "./dtos/SetPage";
+import { SetPage } from "./intefaces/SetPage";
 
 export const fetchMoviesStart = (): FetchStartAction => ({
   type: FETCH_MOVIES_START,
@@ -55,13 +55,13 @@ export const setNextPage = ({
   currentPathName,
   dispatch,
 }: SetPage): SetCurrentPage => {
-  const incrementPageNumber = currentPage + 1;
+  const incrementedPageNumber = currentPage + 1;
 
-  dispatch(fetchMovies(currentPathName, incrementPageNumber));
+  dispatch(fetchMovies(currentPathName, incrementedPageNumber));
 
   return {
     type: SET_CURRENT_PAGE,
-    payload: incrementPageNumber,
+    payload: incrementedPageNumber,
   };
 };
 
@@ -70,13 +70,13 @@ export const setPreviousPage = ({
   currentPathName,
   dispatch,
 }: SetPage): SetCurrentPage => {
-  const decrementPageNumber = currentPage - 1;
+  const decrementedPageNumber = currentPage - 1;
 
-  dispatch(fetchMovies(currentPathName, decrementPageNumber));
+  dispatch(fetchMovies(currentPathName, decrementedPageNumber));
 
   return {
     type: SET_CURRENT_PAGE,
-    payload: decrementPageNumber,
+    payload: decrementedPageNumber,
   };
 };
 

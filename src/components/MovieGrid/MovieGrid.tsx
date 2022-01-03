@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router";
 
@@ -29,5 +29,7 @@ const MovieGrid: React.FC = () => {
     </div>
   );
 };
+
+
 
 export default MovieGrid;
