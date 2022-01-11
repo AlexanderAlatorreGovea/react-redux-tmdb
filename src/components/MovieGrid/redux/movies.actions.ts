@@ -1,4 +1,3 @@
-import { Dispatch } from "react";
 import { AnyAction } from "redux";
 import { ThunkAction } from "redux-thunk";
 
